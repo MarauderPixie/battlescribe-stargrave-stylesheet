@@ -127,11 +127,10 @@
                     background-color: #fff;
                     border: 1px solid #555555;
                     display: inline-block;
-                    margin-right: 2px;
+                    margin: 2px;
                 }
-                .hitbox:first-child {
-                    margin-top: 12px;
-                    margin-left: 8px;
+                .hitbox:first-of-type {
+                    margin-left: 10px;
                 }
                 .hitbox:nth-child(3n+2) {
                     background-color: #10909e;
@@ -145,6 +144,22 @@
                     color: black;
                     font-size: 0.9em;
                     min-height: 36px;
+                }
+
+                .column {
+                    float: left;
+                    padding: 0;
+                }
+                .left {
+                    width: 60%;
+                }
+                .right {
+                    width: 40%;
+                }
+                .row:after {
+                    content: "";
+                    display: table;
+                    clear: both;
                 }
             }
             </style>
@@ -193,45 +208,54 @@
         <xsl:variable name="powers" select="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Power']" />
 
 		<div class="card-body">
+        
+                    
+            
+                    <div class="card-header" style="align: left">
+                        <b><xsl:value-of select="./@name"/></b> - <xsl:value-of select="bs:categories/bs:category[@entryId='8749-37ea-6f9e-0824' or @entryId='16bf-5402-ac6a-dab3' or @entryId='13f2-16cf-e0bd-6624' or @entryId='12dd-f26c-ca77-721a']/@name"/>
+                        <span style="float: right">
+                        <xsl:choose>
+                            <xsl:when test="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Title']">
+                                <b><xsl:value-of select="@customName"/> the <xsl:value-of select="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Title']/@name"/> </b>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <b><xsl:value-of select="@customName"/></b>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        </span>
+                    </div>
 
-            <div class="card-header" style="align: left">
-                <b><xsl:value-of select="./@name"/></b> - <xsl:value-of select="bs:categories/bs:category[@entryId='8749-37ea-6f9e-0824' or @entryId='16bf-5402-ac6a-dab3' or @entryId='13f2-16cf-e0bd-6624' or @entryId='12dd-f26c-ca77-721a']/@name"/>
-                <span style="float: right">
-                <xsl:choose>
-                    <xsl:when test="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Title']">
-                        <b><xsl:value-of select="@customName"/> the <xsl:value-of select="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Title']/@name"/> </b>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <b><xsl:value-of select="@customName"/></b>
-                    </xsl:otherwise>
-                </xsl:choose>
-                </span>
-		    </div>
+            <div class="row">
+                <div class="column left">
+                    <table class="stats" cellspacing="0">
+                        <tr>
+                            <td> Move </td>
+                            <td> Fight </td>
+                            <td> Shoot </td>
+                            <td> Armour </td>
+                            <td> Will </td>
+                            <td> Health </td>
+                        </tr>
+                        <tr>
+                            <td> <xsl:value-of select="$stats/bs:characteristic[@name='M']"/> </td>
+                            <td> <xsl:value-of select="$stats/bs:characteristic[@name='F']"/> </td>
+                            <td> <xsl:value-of select="$stats/bs:characteristic[@name='S']"/> </td>
+                            <td> <xsl:value-of select="$stats/bs:characteristic[@name='A']"/> </td>
+                            <td> <xsl:value-of select="$stats/bs:characteristic[@name='W']"/> </td>
+                            <td> <xsl:value-of select="$stats/bs:characteristic[@name='H']"/> </td>
+                        </tr>
+                    </table>
+                </div>
 
-			<table class="stats" cellspacing="0">
-                <tr>
-                    <td> Move </td>
-                    <td> Fight </td>
-                    <td> Shoot </td>
-                    <td> Armour </td>
-                    <td> Will </td>
-                    <td> Health </td>
-				</tr>
-				<tr>
-                    <td> <xsl:value-of select="$stats/bs:characteristic[@name='M']"/> </td>
-                    <td> <xsl:value-of select="$stats/bs:characteristic[@name='F']"/> </td>
-                    <td> <xsl:value-of select="$stats/bs:characteristic[@name='S']"/> </td>
-                    <td> <xsl:value-of select="$stats/bs:characteristic[@name='A']"/> </td>
-                    <td> <xsl:value-of select="$stats/bs:characteristic[@name='W']"/> </td>
-                    <td> <xsl:value-of select="$stats/bs:characteristic[@name='H']"/> </td>
-				</tr>
-			</table>
-
-                
-            <!-- WOUND TRACKER !-->
-            <div class="wounds">
-                <b style="margin-right: 8px;">Wounds:</b> <xsl:call-template name="wound-tracker" />
+                <div class="column right">
+                    <!-- WOUND TRACKER !-->
+                    <span class="wounds">
+                        <p><b>Wounds:</b> <xsl:call-template name="wound-tracker" /></p>
+                    </span>
+                </div>
             </div>
+                    
+                
 
                 
             <!-- DECLARE GEAR -->
@@ -240,13 +264,12 @@
                 <xsl:choose>
                     <xsl:when test="bs:categories/bs:category[@name='First Mate' or @name='Captain']">
                         <xsl:for-each select="$leader-gear">
-                            <xsl:value-of select="@name"/>
-                            <xsl:if test="position() != last()">, </xsl:if>
+                            <xsl:value-of select="@name"/>,
                         </xsl:for-each>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:for-each select="$gear">
-                            <xsl:value-of select="@name" separator=", "/>
+                            <xsl:value-of select="@name"/>, 
                         </xsl:for-each>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -279,7 +302,7 @@
         <xsl:param name="index" select="1" />
         <xsl:param name="maxValue" select="$hp" />
 
-        <div class="hitbox"></div>
+        <span class="hitbox"></span>
         
         <!-- &lt; represents "<" for html entities -->
         <xsl:if test="$index &lt; $maxValue">
