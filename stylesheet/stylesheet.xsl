@@ -132,7 +132,7 @@
                 .hitbox:first-of-type {
                     margin-left: 8px;
                 }
-                .hitbox:nth-child(3n+2) {
+                .hitbox:nth-child(3n+1) {
                     background-color: #10909e;
                 }
 
@@ -212,17 +212,14 @@
         <div class="row">
                 <div class="column left">            
                     <div class="card-header" style="align: left">
-                        <b><xsl:value-of select="./@name"/></b> - <xsl:value-of select="bs:categories/bs:category[@entryId='8749-37ea-6f9e-0824' or @entryId='16bf-5402-ac6a-dab3' or @entryId='13f2-16cf-e0bd-6624' or @entryId='12dd-f26c-ca77-721a']/@name"/>
-                        <span style="float: right">
                         <xsl:choose>
-                            <xsl:when test="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Title']">
-                                <b><xsl:value-of select="@customName"/> the <xsl:value-of select="bs:selections/bs:selection/bs:profiles/bs:profile[@typeName='Title']/@name"/> </b>
+                            <xsl:when test="bs:selections/bs:selection[@name='is a Robot']">
+                                <b><xsl:value-of select="./@name"/> Robot</b> - <xsl:value-of select="bs:categories/bs:category[@entryId='8749-37ea-6f9e-0824' or @entryId='16bf-5402-ac6a-dab3' or @entryId='13f2-16cf-e0bd-6624' or @entryId='12dd-f26c-ca77-721a']/@name"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <b><xsl:value-of select="@customName"/></b>
+                                <b><xsl:value-of select="./@name"/></b> - <xsl:value-of select="bs:categories/bs:category[@entryId='8749-37ea-6f9e-0824' or @entryId='16bf-5402-ac6a-dab3' or @entryId='13f2-16cf-e0bd-6624' or @entryId='12dd-f26c-ca77-721a']/@name"/>
                             </xsl:otherwise>
                         </xsl:choose>
-                        </span>
                     </div>
 
                     <table class="stats" cellspacing="0">
