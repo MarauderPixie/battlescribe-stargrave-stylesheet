@@ -130,7 +130,7 @@
                     margin: 2px;
                 }
                 .hitbox:first-of-type {
-                    margin-left: 10px;
+                    margin-left: 8px;
                 }
                 .hitbox:nth-child(3n+2) {
                     background-color: #10909e;
@@ -209,8 +209,8 @@
 
 		<div class="card-body">
         
-                    
-            
+        <div class="row">
+                <div class="column left">            
                     <div class="card-header" style="align: left">
                         <b><xsl:value-of select="./@name"/></b> - <xsl:value-of select="bs:categories/bs:category[@entryId='8749-37ea-6f9e-0824' or @entryId='16bf-5402-ac6a-dab3' or @entryId='13f2-16cf-e0bd-6624' or @entryId='12dd-f26c-ca77-721a']/@name"/>
                         <span style="float: right">
@@ -225,8 +225,6 @@
                         </span>
                     </div>
 
-            <div class="row">
-                <div class="column left">
                     <table class="stats" cellspacing="0">
                         <tr>
                             <td> Move </td>
@@ -250,7 +248,7 @@
                 <div class="column right">
                     <!-- WOUND TRACKER !-->
                     <span class="wounds">
-                        <p><b>Wounds:</b> <xsl:call-template name="wound-tracker" /></p>
+                        <p><b style="vertical-align: bottom; margin-left: 2px;">Wounds:</b> <xsl:call-template name="wound-tracker" /></p>
                     </span>
                 </div>
             </div>
