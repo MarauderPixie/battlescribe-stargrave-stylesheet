@@ -42,8 +42,13 @@
                     width: 10cm;
                     min-height: 2cm;
                     background-color: #ffffff;
+                    border-style: dashed solid;
+                    border-width: 2px;
+                    border-color: #85b2c1;
+                    /*
                     border: 6px solid transparent;
                     border-image: url(https://www.worldanvil.com/uploads/images/570410efbb0c11476af474932082da6c.png) 6 stretch;
+                    */
                     padding: 5px;
                     margin-bottom: 0;
                     font-size: 0.8em; 
@@ -133,8 +138,14 @@
                     margin-left: 8px;
                 }
                 .hitbox:nth-child(3n+1) {
-                    background-color: #10909e;
+                    background-color: #12a9ba;
                 }
+                .hitbox:nth-last-child(-n+4) {
+                    background-color: #ff4d4d;
+                }
+                /* .hitbox:nth-last-child(-n+4)::after {
+                    content: "-2";
+                } */
 
 
                 .wounds { 
